@@ -1,0 +1,55 @@
+services:
+  sempl-it-monitoring:
+    container_name: 'sempl-it-monitoring'
+    image: 'sempl-it-monitoring'
+    build: '.'
+    restart: 'unless-stopped'
+    ports:
+      - '30011:30011'
+    environment:
+      - 'PYTHONUNBUFFERED=1'
+      - 'MONITORING_API_KEY=${MONITORING_API_KEY:-123456789}'
+      - 'MYSQL_HOST=sempl-it-monitoring-database'
+      - 'MYSQL_PORT=3306'
+      - 'MYSQL_USER=${MYSQL_USER:-sempl-it-user}'
+      - 'MYSQL_PASSWORD=${MYSQL_PASSWORD:-sempl-it-password}'
+      - 'MYSQL_DATABASE=${MYSQL_DATABASE:-sempl-it-database}'
+    healthcheck:
+      test: [ 'CMD', 'curl', '--fail', 'http://localhost:30011/api/v1/healthcheck' ]
+
+  sempl-it-monitoring-pma:
+    container_name: 'sempl-it-monitoring-pma'
+    image: 'bitnami/phpmyadmin:5.2.2'
+    restart: 'unless-stopped'
+    ports:
+      - '40011:8080'
+    environment:
+      - 'DATABASE_HOST=sempl-it-monitoring-database'
+      - 'DATABASE_PORT_NUMBER=3306'
+      - 'DATABASE_ALLOW_NO_PASSWORD=no'
+      - 'PHPMYADMIN_ALLOW_ARBITRARY_SERVER=false'
+      - 'PHPMYADMIN_ALLOW_REMOTE_CONNECTIONS=yes'
+    depends_on:
+      sempl-it-monitoring-database:
+        condition: service_healthy
+    healthcheck:
+      test: [ 'CMD', 'pidof', 'httpd' ]
+
+  sempl-it-monitoring-database:
+    container_name: 'sempl-it-monitoring-database'
+    image: 'bitnami/mysql:9.3.0'
+    restart: 'unless-stopped'
+    volumes:
+      - 'sempl-it-monitoring-database-volume:/bitnami/mysql/data'
+    environment:
+      - 'MYSQL_ROOT_USER=${MYSQL_ROOT_USER:-root}'
+      - 'MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root-password}'
+      - 'MYSQL_USER=${MYSQL_USER:-sempl-it-user}'
+      - 'MYSQL_PASSWORD=${MYSQL_PASSWORD:-sempl-it-password}'
+      - 'MYSQL_DATABASE=${MYSQL_DATABASE:-sempl-it-database}'
+    healthcheck:
+      test: [ "CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', '$$MYSQL_USER', '-p$$MYSQL_PASSWORD' ]
+
+volumes:
+  sempl-it-monitoring-database-volume:
+   driver: 'local'
