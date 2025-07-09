@@ -5,7 +5,7 @@ services:
     build: '.'
     restart: 'unless-stopped'
     ports:
-      - '30011:30011'
+      - '10050:30011'
     environment:
       - 'PYTHONUNBUFFERED=1'
       - 'MONITORING_API_KEY=${MONITORING_API_KEY:-123456789}'
@@ -22,7 +22,7 @@ services:
     image: 'bitnami/phpmyadmin:5.2.2'
     restart: 'unless-stopped'
     ports:
-      - '40011:8080'
+      - '20050:8080'
     environment:
       - 'DATABASE_HOST=sempl-it-monitoring-database'
       - 'DATABASE_PORT_NUMBER=3306'
