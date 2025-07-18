@@ -16,4 +16,4 @@ RUN rm -rf /tmp/* \
     && rm -rf /usr/uvx
 
 # Run FastAPI application
-CMD ["uvicorn", "app.app:app", "--host=0.0.0.0", "--port=30011", "--log-level=info", "--workers=2", "--timeout-keep-alive=120"]
+CMD ["uvicorn", "app.app:app", "--host=0.0.0.0", "--port=30050", "--log-level=info", "--workers=2", "--timeout-keep-alive=120"]
