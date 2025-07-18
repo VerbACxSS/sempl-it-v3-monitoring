@@ -5,7 +5,7 @@ services:
     build: '.'
     restart: 'unless-stopped'
     ports:
-      - '10050:30011'
+      - '10050:30050'
     environment:
       - 'PYTHONUNBUFFERED=1'
       - 'MONITORING_API_KEY=${MONITORING_API_KEY:-123456789}'
@@ -15,7 +15,7 @@ services:
       - 'MYSQL_PASSWORD=${MYSQL_PASSWORD:-sempl-it-password}'
       - 'MYSQL_DATABASE=${MYSQL_DATABASE:-sempl-it-database}'
     healthcheck:
-      test: [ 'CMD', 'curl', '--fail', 'http://localhost:30011/api/v1/healthcheck' ]
+      test: [ 'CMD', 'curl', '--fail', 'http://localhost:30050/api/v1/healthcheck' ]
 
   sempl-it-monitoring-pma:
     container_name: 'sempl-it-monitoring-pma'

@@ -22,7 +22,7 @@ async def lifespan(_app: FastAPI) -> AsyncGenerator[None, None]:
                 'engine': 'tortoise.backends.mysql',
                 'credentials': {
                     'host': os.getenv('MYSQL_HOST', 'localhost'),
-                    'port': os.getenv('MYSQL_PORT', 20011),
+                    'port': os.getenv('MYSQL_PORT', 20050),
                     'user': os.getenv('MYSQL_USER', 'sempl-it-user'),
                     'password': os.getenv('MYSQL_PASSWORD', 'sempl-it-password'),
                     'database': os.getenv('MYSQL_DATABASE', 'sempl-it-database'),
