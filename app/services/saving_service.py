@@ -25,7 +25,8 @@ class SavingService:
                                                               sentence_splitter=simplification_progress['sentence_splitter'],
                                                               nominalizations=simplification_progress['nominalizations'],
                                                               verbs=simplification_progress['verbs'],
-                                                              sentence_reorganizer=simplification_progress['sentence_reorganizer'])
+                                                              sentence_reorganizer=simplification_progress['sentence_reorganizer'],
+                                                              explain=simplification_progress['explain'],)
         return simplification.id
 
     @staticmethod
