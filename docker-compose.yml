@@ -46,7 +46,7 @@ services:
       dockerfile: 'Dockerfile-mysql'
     restart: 'unless-stopped'
     volumes:
-      - 'sempl-it-monitoring-database-volume:/var/lib/mariadb'
+      - 'sempl-it-monitoring-database-volume:/var/lib/mysql'
     environment:
       - 'MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root-password}'
       - 'MYSQL_USER=${MYSQL_USER:-sempl-it-user}'
