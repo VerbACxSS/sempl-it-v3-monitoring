@@ -48,11 +48,11 @@ services:
     volumes:
       - 'sempl-it-monitoring-database-volume:/var/lib/mariadb'
     environment:
-      - 'MARIADB_ROOT_USER=${MYSQL_ROOT_USER:-root}'
-      - 'MARIADB_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root-password}'
-      - 'MARIADB_USER=${MYSQL_USER:-sempl-it-user}'
-      - 'MARIADB_PASSWORD=${MYSQL_PASSWORD:-sempl-it-password}'
-      - 'MARIADB_DATABASE=${MYSQL_DATABASE:-sempl-it-database}'
+      - 'MYSQL_ROOT_USER=${MYSQL_ROOT_USER:-root}'
+      - 'MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root-password}'
+      - 'MYSQL_USER=${MYSQL_USER:-sempl-it-user}'
+      - 'MYSQL_PASSWORD=${MYSQL_PASSWORD:-sempl-it-password}'
+      - 'MYSQL_DATABASE=${MYSQL_DATABASE:-sempl-it-database}'
     healthcheck:
       test: [ "CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', '$$MYSQL_USER', '-p$$MYSQL_PASSWORD' ]
 
