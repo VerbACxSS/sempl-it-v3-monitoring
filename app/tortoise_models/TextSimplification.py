@@ -14,6 +14,7 @@ class SavedTextSimplification(Model):
     nominalizations = fields.TextField(null=False)
     verbs = fields.TextField(null=False)
     sentence_reorganizer = fields.TextField(null=False)
+    explain = fields.TextField(null=True)
 
     q1 = fields.TextField(null=True)
     q2 = fields.TextField(null=True)

@@ -11,6 +11,7 @@ class SimplificationRequest(BaseModel):
     nominalizations: str = Field(default='', serialization_alias="nominalizations")
     verbs: str = Field(default='', serialization_alias="verbs")
     sentence_reorganizer: str = Field(default='', serialization_alias="sentence_reorganizer")
+    explain: str = Field(default='', serialization_alias="explain")
 
     def __getitem__(self, item):
         return getattr(self, item)
