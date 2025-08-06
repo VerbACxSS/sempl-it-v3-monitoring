@@ -30,7 +30,7 @@ services:
       - '20050:80'
     environment:
       - 'PMA_HOST=sempl-it-monitoring-database'
-      - 'PMA_PORTS=3306'
+      - 'PMA_PORT=3306'
       - 'PMA_ARBITRARY=0'
     depends_on:
       sempl-it-monitoring-database:
