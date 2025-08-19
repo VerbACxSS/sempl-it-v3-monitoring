@@ -20,10 +20,10 @@ RUN rm -rf /tmp/* \
     && rm -rf /usr/uvx
 
 ## Create no-root user
-RUN useradd -m beuser && usermod -a -G beuser beuser
+RUN useradd -m beuser && usermod -aG beuser beuser
 
 # Set the no-root user
 USER beuser:beuser
 
 # Run FastAPI application
-CMD ["uvicorn", "app.app:app", "--host=0.0.0.0", "--port=30050", "--log-level=info", "--timeout-keep-alive=120"]
+CMD ["uvicorn", "app.app:app", "--host=0.0.0.0", "--port=30050", "--log-level=info", "--timeout-keep-alive=60"]
